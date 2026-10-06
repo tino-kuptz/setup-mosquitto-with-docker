@@ -198,7 +198,8 @@ sudo docker ps
 # login interactively into the mqtt container
 sudo docker exec -it <container-id> sh
 
-# Change permission of password file
+# Change owner and permission of password file
+chown mosquitto:mosquitto /mosquitto/config/pwfile
 chmod 0700 /mosquitto/config/pwfile
 
 # Create a new user, it will prompt for password
