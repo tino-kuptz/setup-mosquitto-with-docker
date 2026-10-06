@@ -198,11 +198,11 @@ sudo docker ps
 # login interactively into the mqtt container
 sudo docker exec -it <container-id> sh
 
-# Create new password file and add user and it will prompt for password
-mosquitto_passwd -c /mosquitto/config/pwfile user1
+# Change permission of password file
+chmod 0700 /mosquitto/config/pwfile
 
-# Add additional users (remove the -c option) and it will prompt for password
-mosquitto_passwd /mosquitto/config/pwfile user2
+# Create a new user, it will prompt for password
+mosquitto_passwd /mosquitto/config/pwfile user
 
 # delete user command format
 mosquitto_passwd -D /mosquitto/config/pwfile <user-name-to-delete>
@@ -219,7 +219,7 @@ Usage: mosquitto_passwd [-H sha512 | -H sha512-pbkdf2] [-c | -D] passwordfile us
        mosquitto_passwd [-H sha512 | -H sha512-pbkdf2] [-c] -b passwordfile username password
        mosquitto_passwd -U passwordfile
  -b : run in batch mode to allow passing passwords on the command line.
- -c : create a new password file. This will overwrite existing files.
+ -c : create a new password file.
  -D : delete the username rather than adding/updating its password.
  -H : specify the hashing algorithm. Defaults to sha512-pbkdf2, which is recommended.
       Mosquitto 1.6 and earlier defaulted to sha512.
